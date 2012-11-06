@@ -214,6 +214,11 @@ function cnapi_schema() {
         'default' => 0,
         'size' => 'tiny',
       ),
+      'section' => array(
+        'description' => 'Section of the category.',
+        'type' => 'varchar',
+        'length' => 256,
+      ),
     ),
     'indexes' => array(
       'did' => array('did'),
@@ -406,4 +411,29 @@ function cnapi_update_7001() {
     $schema = cnapi_schema();
     db_create_table('cnapi_actor', $schema['cnapi_actor']);
   }
+}
+
+/**
+ * Add the section field to cnapi_category.
+ */
+function cnapi_update_7002() {
+
+  if (!db_field_exists('cnapi_category', 'section')) {
+    db_add_field('cnapi_category', 'section', array(
+      'description' => 'Section of the category.',
+      'type' => 'varchar',
+      'length' => 256,
+    ));
+  }
+
+  module_load_include('inc', 'cnapi', 'cnapi.import');
+
+  $mappings = array(
+    'cid'       => array('path' => '@cnet_id', 'parser' => 'strval'),
+    'name'      => array('path' => '@title', 'parser' => 'strval'),
+    'did'       => array('path' => '@dimension', 'parser' => 'intval'),
+    'section'   => array('path' => '@section', 'parser' => 'strval'),
+  );
+  _cnapi_xml_import(CNAPI_XML_CATEGORISATION, '/Categorisation/categorisation', $mappings, 'cnapi_category');
+
 }

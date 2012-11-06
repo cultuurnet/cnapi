@@ -140,16 +140,22 @@ function template_preprocess_cnapi_ui_event_mini_summary(&$variables) {
   $default_image = url(drupal_get_path('module', 'cnapi_ui') . '/img/default-image.gif', array('absolute' => $variables['url_absolute']));
   $thumbnail_url = $default_image;
   if (isset($object['thumbnail']) && !empty($object['thumbnail'])) {
-    $thumbnail_url = str_replace('maxwidth=162&maxheight=109', 'width=50&height=50&crop=auto', $object['thumbnail']);
+    $thumbnail_url = str_replace('maxwidth=162&maxheight=109', 'width=162&height=109&crop=auto', $object['thumbnail']);
   }
   $thumbnail_img = theme('image', array('path' => $thumbnail_url, 'alt' => $variables['title']));
   $object_url['options']['html'] = TRUE;
   $variables['thumbnail'] = l($thumbnail_img, $object_url['path'], $object_url['options']);
 
-  if (user_is_anonymous()) {
-    $variables['like_link'] = l('Vind ik leuk', 'authenticated', array('attributes' => array('class' => array('disabled')))) . theme('culturefeed_ui_connect_hover');
-    $variables['remove_link'] = l('Vind ik niet leuk', 'authenticated', array('attributes' => array('class' => array('disabled')))) . theme('culturefeed_ui_connect_hover');
-  }
+  if (module_exists('culturefeed')) {
+
+    $url = 'culturefeed/do/' . CultureFeed_Activity::TYPE_LIKE . '/' . CultureFeed_Activity::CONTENT_TYPE_EVENT . '/' . $object['cdbid'];
+     if (user_is_anonymous()) {
+       $variables['like_link'] = l('Vind ik leuk', 'authenticated', array('attributes' => array('class' => array('like-link disabled')))) . theme('culturefeed_ui_connect_hover', array('url' => $url));
+     }
+     else {
+       $variables['like_link'] = l('Vind ik leuk', $url, array('attributes' => array('class' => array('like-link'))), array('absolute' => TRUE));
+     }
+   }
 
 }
 
@@ -233,6 +239,8 @@ function _template_preprocess_cnapi_ui_object_summary(&$variables, $type) {
 
   // where
   if ($type == 'event') {
+    $variables['city'] = isset($object['city']) ? check_plain($object['city']) : '';
+    $variables['location'] = isset($object['location']) ? check_plain($object['location']) : '';
     $where = array();
     if (isset($object['location']) && !empty($object['location'])) {
       $where[] = check_plain($object['location']);

@@ -360,6 +360,16 @@ function _cnapi_get_categories($did) {
   return $categories[$did];
 }
 
+function _cnapi_get_section_categories($section, $did) {
+  $categories = &drupal_static(__FUNCTION__, array());
+
+  if (!isset($categories[$section])) {
+    $categories[$section] = db_query("SELECT cid, name FROM {cnapi_category} WHERE did = :did AND section = :section ORDER BY name", array(':did' => $did, ':section' => $section))->fetchAllAssoc('cid', PDO::FETCH_ASSOC);
+  }
+
+  return $categories[$section];
+}
+
 function cnapi_get_headings($tid = NULL) {
   $headings = &drupal_static(__FUNCTION__, NULL);
 

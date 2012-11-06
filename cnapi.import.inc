@@ -42,6 +42,7 @@ function cnapi_import() {
     'cid'       => array('path' => '@cnet_id', 'parser' => 'strval'),
     'name'      => array('path' => '@title', 'parser' => 'strval'),
     'did'       => array('path' => '@dimension', 'parser' => 'intval'),
+    'section'   => array('path' => '@section', 'parser' => 'strval'),
   );
   _cnapi_xml_import(CNAPI_XML_CATEGORISATION, '/Categorisation/categorisation', $mappings, 'cnapi_category');
 
@@ -183,22 +184,22 @@ function _cnapi_xml_import($xml, $path, $mappings, $table, $primary_key = array(
 function cnapi_import_actors() {
   $pagelength = 100;
   $page = 1;
-  
+
   $actors = array();
-  
+
   do {
     $result = cnapi_get_actors(array('pagelength' => $pagelength, 'page' => $page));
-    
+
     $actors = array_merge($actors, $result['data']);
-    
+
     $total = $result['total'];
 
     $page++;
   }
   while ($pagelength * ($page - 1) < $total);
-  
+
   db_truncate('cnapi_actor')->execute();
-  
+
   foreach ($actors as $actor) {
     $object = array(
       'cdbid' => $actor['cdbid'],

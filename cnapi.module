@@ -75,13 +75,6 @@ function cnapi_menu() {
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
-  $items['cnapi/autocomplete/location/onlyzip'] = array(
-    'title' => 'Locations autocomplete',
-    'page callback' => 'cnapi_location_autocomplete',
-    'page arguments' => array(TRUE),
-    'access arguments' => array('access content'),
-    'type' => MENU_CALLBACK,
-  );
   $items['cnapi/autocomplete/location/cities'] = array(
     'title' => 'Locations autocomplete',
     'page callback' => 'cnapi_get_location_autocomplete',
