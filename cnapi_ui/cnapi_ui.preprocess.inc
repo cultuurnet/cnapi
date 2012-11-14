@@ -672,7 +672,7 @@ function _template_preprocess_cnapi_ui_object(&$variables, $type) {
     if (isset($detail['media']['other'])) {
       foreach ($detail['media']['other'] as $link) {
         if (isset($link['mediatype']) && $link['mediatype'] == 'reservations') {
-          $variables['tickets'][] = l($link['title'], $link['hlink'], array('attributes' => array('class' => 'reservation-link', 'rel' => 'nofollow')));
+          $variables['tickets'][] = l('Bestel tickets', $link['hlink'], array('attributes' => array('class' => 'reservation-link', 'rel' => 'nofollow')));
         }
       }
     }
