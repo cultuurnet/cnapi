@@ -40,7 +40,7 @@ function cnapi_snode_url_inbound_alter(&$path, $original_path, $path_language) {
 
   // Determine cdbid on the 4th argument of the path.
   $cdbid = arg(3, $path);
-  
+
   // Special case 'untitled'.
   if ($cdbid == 'untitled') {
     return;
@@ -76,6 +76,7 @@ function cnapi_snode_url_inbound_alter(&$path, $original_path, $path_language) {
 
   // ... and set our static cache.
   $map[$path] = $node->nid;
+
 }
 
 /**

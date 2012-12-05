@@ -1,0 +1,57 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the CultuurNet API module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function cnapi_ui_uninstall() {
+  variable_del('cnapi_ui_last_registration');
+}
+
+/**
+ * Implements hook_schema().
+ */
+function cnapi_ui_schema() {
+
+  $schema['cnapi_deleted_objects'] = array(
+    'description' => t("Stores the cdbids of deleted events."),
+    'fields' => array(
+      'cdbid' => array(
+        'type' => 'varchar',
+        'length' => 64,
+        'not null' => TRUE,
+        'default' => ''
+      ),
+      'type' => array(
+        'type' => 'varchar',
+        'length' => 125,
+        'not null' => TRUE,
+        'default' => ''
+      ),
+      'deleted' => array(
+        'description' => 'The Unix timestamp when the object was deleted.',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0,
+      ),
+    ),
+    'primary key' => array('cdbid'),
+  );
+
+  return $schema;
+
+}
+
+/**
+ * Add the cnapi_deleted_objects table.
+ */
+function cnapi_ui_update_7001() {
+
+  $schema = cnapi_ui_schema();
+  db_create_table('cnapi_deleted_objects', $schema['cnapi_deleted_objects']);
+
+}

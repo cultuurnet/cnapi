@@ -106,3 +106,4 @@ function cnapi_snode_schema() {
 
   return $schema;
 }
+

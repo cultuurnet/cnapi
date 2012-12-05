@@ -84,6 +84,44 @@ function cnapi_ui_init() {
 }
 
 /**
+ * Implements hook_exit().
+ */
+function cnapi_ui_exit() {
+
+  // Check if the 404 should be 410 (object deleted).
+  if (drupal_get_http_header('Status') == '404 Not Found') {
+
+    $request = cnapi_ui_get_active_request();
+    $type = '';
+    if (isset($request['event'])) {
+      $type = 'event';
+    }
+    elseif (isset($request['production'])) {
+      $type = 'production';
+    }
+    elseif (isset($request['actor'])) {
+      $type = 'actor';
+    }
+
+    // Check if this object was deleted. If it was found, set the 410.
+    if ($type) {
+
+      $cdbid = db_query('SELECT cdbid FROM {cnapi_deleted_objects} WHERE cdbid = :cdbid AND type = :type', array(
+        ':cdbid' => $request[$type],
+        ':type' => $type)
+      )->fetchField();
+
+      if ($cdbid) {
+        drupal_add_http_header('Status', '410 Gone');
+      }
+
+    }
+
+  }
+
+}
+
+/**
  * Implements hook_theme().
  */
 function cnapi_ui_theme() {

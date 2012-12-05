@@ -107,12 +107,12 @@ function cnapi_snode_add_node($object) {
   $types = node_type_get_types();
 
   $uid = isset($object->uid) ? $object->uid : variable_get('cnapi_snode_sync_user', 0);
-  
+
   $account = user_load($uid);
   $node = (object) array('uid' => $uid, 'name' => (isset($account->name) ? $account->name : ''), 'type' => $object->type, 'language' => LANGUAGE_NONE);
 
   node_object_prepare($node);
-  
+
   $node->uid = $uid;
   $node->name = (isset($account->name) ? $account->name : '');
 
@@ -189,6 +189,7 @@ function cnapi_snode_cleanup() {
         if ($node) {
           node_delete($node->nid);
         }
+
       }
     }
   }
