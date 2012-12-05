@@ -64,6 +64,6 @@ function template_preprocess_cnapi_browse_filter_option(&$variables) {
   if (isset($variables['option']['url_remove'])) {
     $url = cnapi_url_dp2dua($variables['option']['url_remove']);
     $url['options']['attributes']['class'] = array('remove');
-    $variables['link_remove'] = l('x', $url['path'], $url['options']);
+    $variables['link_remove'] = l('×', $url['path'], $url['options']);
   }
 }

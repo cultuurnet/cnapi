@@ -39,7 +39,7 @@ function cnapi_extras_block_view_actor_playlist() {
     $items[] = theme('cnapi_extras_actor_playlist_event', array('event' => $event));
   }
 
-  $block['subject'] = 'Speellijst';
+  $block['subject'] = 'Agenda ' . $actor['detail']['nl']['title'];
   $block['content'] = array(
     '#theme' => 'item_list',
     '#items' => $items,

@@ -38,7 +38,7 @@ function template_preprocess_cnapi_ui_list(&$variables) {
   $filters = cnapi_ui_get_active_request_filters();
 
   if (isset($filters['query'])) {
-    $query = '<strong>' . $filters['query'][0]['description'] . ' ' . cnapi_url_dp2dul('x', $filters['query'][0]['url_remove']) . '</strong>';
+    $query = '<strong>' . $filters['query'][0]['description'] . ' ' . cnapi_url_dp2dul('×', $filters['query'][0]['url_remove']) . '</strong>';
   }
 
   // Text for result info (number of results, ...)

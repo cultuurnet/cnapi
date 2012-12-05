@@ -99,7 +99,7 @@ function cnapi_ui_clean_rss_queries(&$query) {
  * @param $http_response_code
  *   @see drupal_goto
  */
-function cnapi_ui_goto($request, $options = array(), $http_response_code = 302) {
+function cnapi_ui_goto($request, $extra_options = array(), $http_response_code = 302) {
   // Get a Drupal url array representation for the request.
   $url = cnapi_url_dp2dua($request);
 
@@ -108,14 +108,14 @@ function cnapi_ui_goto($request, $options = array(), $http_response_code = 302) 
   $options = $url['options'];
 
   // If extra options were passed, add to (or override) those already in the url of the request.
-  if (!empty($options)) {
-    foreach ($options as $key => $value) {
+  if (!empty($extra_options)) {
+    foreach ($extra_options as $key => $value) {
       $options[$key] = $value;
     }
   }
 
   // Redirect to the new page.
-  drupal_goto($path, $url['options'], $http_response_code);
+  drupal_goto($path, $options, $http_response_code);
 }
 
 /**
