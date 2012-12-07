@@ -44,7 +44,7 @@ function cnapi_admin_settings() {
   $form['settings']['cnapi_lib_version'] = array(
     '#type' => 'textfield',
     '#title' => t('Library version'),
-    '#description' => t('Version identifier of the values XML files.'),
+    '#description' => t('Version identifier of the values XML files. Leave empty to get latest version.'),
     '#default_value' => variable_get('cnapi_lib_version', ''),
     '#size' => 4,
     '#maxlength' => 4,
