@@ -23,7 +23,7 @@ function cnapi_extras_block_view_actor_playlist() {
 
   $query = array();
   $query['q'] = $actor['detail']['nl']['title'];
-  $query['cityid'] = $actor['contactinfo']['address']['cityid'];
+  $query['city'] = $actor['contactinfo']['address']['city'];
   $query['sort'] = 'date ASC';
   $query['pagelength'] = 100;
 
