@@ -99,7 +99,7 @@ function cnapi_ui_clean_rss_queries(&$query) {
  * @param $http_response_code
  *   @see drupal_goto
  */
-function cnapi_ui_goto($request, $extra_options = array(), $http_response_code = 302) {
+function cnapi_ui_goto($request, $extra_options = array(), $http_response_code = 301) {
   // Get a Drupal url array representation for the request.
   $url = cnapi_url_dp2dua($request);
 
