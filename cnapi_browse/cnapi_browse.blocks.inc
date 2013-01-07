@@ -495,11 +495,11 @@ function cnapi_browse_filter_what_production_form($form, &$form_state, $report) 
 
   asort($options);
 
-  $options = array(CNAPI_OPTION_NONE => 'Selecteer een productie') + $options;
+  $options = array(CNAPI_OPTION_NONE => 'Selecteer een film') + $options;
 
   $form['cdbid'] = array(
     '#type' => 'select',
-    '#title' => 'Productie',
+    '#title' => 'Titel',
     '#options' => $options,
     '#default_value' => isset($request['query']['cdbid']) ? $request['query']['cdbid'] : '',
     '#attributes' => array('class' => array('autosubmit')),
@@ -507,8 +507,7 @@ function cnapi_browse_filter_what_production_form($form, &$form_state, $report) 
 
   $form['query'] = array(
     '#type' => 'textfield',
-    '#title' => 'Wat',
-    '#description' => 'Zoek op titel/trefwoord',
+    '#title' => 'Trefwoord',
     '#default_value' => isset($request['query']['query']) ? $request['query']['query'] : '',
   );
 
@@ -723,11 +722,11 @@ function cnapi_browse_filter_where_form($form, &$form_state, $report, $type) {
 
     asort($options);
 
-    $options = array(CNAPI_OPTION_NONE => 'Selecteer een locatie') + $options;
+    $options = array(CNAPI_OPTION_NONE => 'Selecteer een zaal') + $options;
 
     $form['location'] = array(
       '#type' => 'select',
-      '#title' => 'Locatie',
+      '#title' => 'Bioscoop',
       '#options' => $options,
       '#attributes' => array('class' => array('autosubmit')),
     );
