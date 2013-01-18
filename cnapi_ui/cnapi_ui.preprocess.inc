@@ -742,7 +742,10 @@ function _template_preprocess_cnapi_ui_object(&$variables, $type) {
 
 	$variables['links'] = array();
   foreach ($links as $link) {
-    $variables['links'][] = l(truncate_utf8(ltrim($link, 'http://'), 40, FALSE, TRUE), $link, array('attributes' => array('rel' => 'nofollow')));
+    // clean up link text
+    $link_text = ltrim($link, 'http://');
+    $link_text = ltrim($link, 'https://');
+    $variables['links'][] = l(truncate_utf8($link_text, 40, FALSE, TRUE), $link, array('attributes' => array('rel' => 'nofollow')));
   }
 
   if ($type == 'event') {
