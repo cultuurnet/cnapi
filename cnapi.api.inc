@@ -158,5 +158,6 @@ function cnapi_api_request($request) {
   }
   $url = cnapi_url_p2a($request);
   $url = rtrim(variable_get('cnapi_api_location', CNAPI_API_LOCATION), '/') . '/api/' . $url;
+  //watchdog('dev','URL Request: '.$url);
   return cnapi_http_request($url);
 }
