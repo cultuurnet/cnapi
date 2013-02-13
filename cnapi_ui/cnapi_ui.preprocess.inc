@@ -743,8 +743,8 @@ function _template_preprocess_cnapi_ui_object(&$variables, $type) {
 	$variables['links'] = array();
   foreach ($links as $link) {
     // clean up link text
-    $link_text = ltrim($link, 'http://');
-    $link_text = ltrim($link, 'https://');
+    $link_text = str_replace('http://', '', $link);
+    $link_text = str_replace('https://', '', $link_text);
     $variables['links'][] = l(truncate_utf8($link_text, 40, FALSE, TRUE), $link, array('attributes' => array('rel' => 'nofollow')));
   }
 
