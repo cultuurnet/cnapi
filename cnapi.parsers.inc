@@ -204,6 +204,7 @@ function _cnapi_parse_report_item(&$data, $xml) {
 }
 
 function _cnapi_parse_event_list_item(&$data, $xml) {
+  
   // $data['cdbid']
   _cnapi_parse_str($data, 'cdbid', $xml, '@cdbid');
 
@@ -230,8 +231,9 @@ function _cnapi_parse_event_list_item(&$data, $xml) {
 
   // $data['address']
   _cnapi_parse_str($data, 'address', $xml, '@address');
-  if (!empty($attrs['latlng'])) {
-    $latlng = explode(';', strval($attrs['latlng']));
+  
+  if (!empty($xml['latlng'])) {
+    $latlng = explode(';', strval($xml['latlng']));
     if (count($latlng) == 2) {
       $data['gis']['lat'] = $latlng[0];
       $data['gis']['lng'] = $latlng[1];
@@ -276,6 +278,7 @@ function _cnapi_parse_event_list_item(&$data, $xml) {
   
   // $data['reservation']
   _cnapi_parse_str($data, 'reservation', $xml, '@reservation');
+
 }
 
 function _cnapi_parse_production_list_item(&$data, $xml) {
