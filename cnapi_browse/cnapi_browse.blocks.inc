@@ -510,6 +510,11 @@ function cnapi_browse_filter_what_production_form($form, &$form_state, $report) 
     '#title' => 'Trefwoord',
     '#default_value' => isset($request['query']['query']) ? $request['query']['query'] : '',
   );
+  
+  global $user;
+  if ($user->uid) {
+    $form['#token'] = FALSE;
+  }
 
   $form['submit'] = array(
     '#type' => 'submit',
