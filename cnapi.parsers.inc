@@ -278,6 +278,12 @@ function _cnapi_parse_event_list_item(&$data, $xml) {
   
   // $data['reservation']
   _cnapi_parse_str($data, 'reservation', $xml, '@reservation');
+  
+  // $data['keywords']
+  _cnapi_parse_str($data, 'keywords', $xml, '@keywords');
+  if (isset($data['keywords'])) {
+    $data['keywords'] = explode(';', $data['keywords']);
+  }
 
 }
 
