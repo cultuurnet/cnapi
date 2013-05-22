@@ -374,16 +374,6 @@ function _template_preprocess_cnapi_ui_object(&$variables, $type) {
     }
   }
 
-	// video
-	$variables['video'] = '';
-	foreach ($media as $media_item) {
-		if (isset($media_item['mediatype']) && $media_item['mediatype'] == 'video') {
-			if ($video = _cnapi_ui_video_url_to_embed($media_item['hlink'], 240, 180)) {
-				$variables['video'] = $video;
-			}
-		}
-	}
-
   // headings
   if ($type == 'event') {
     $variables['headings'] = '';
@@ -732,6 +722,19 @@ function _template_preprocess_cnapi_ui_object(&$variables, $type) {
       $links[] = $url;
     }
   }
+
+	// video
+	$variables['video'] = '';
+	foreach ($media as $media_item) {
+		if (isset($media_item['mediatype']) && $media_item['mediatype'] == 'video') {
+			if ($video = _cnapi_ui_video_url_to_embed($media_item['hlink'], 240, 180)) {
+				$variables['video'] = $video;
+			}
+			else {
+		    $links[] = $media_item['hlink'];
+		  }
+		}
+	}
 
   // cleaning up links
   foreach ($links as $i => $link) {
