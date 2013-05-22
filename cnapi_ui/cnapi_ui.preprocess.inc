@@ -813,28 +813,24 @@ function _template_preprocess_cnapi_ui_address($address) {
  * Convert a given url to a youtube embed.
  */
 function _cnapi_ui_video_url_to_embed($url, $width, $height) {
-  // Construct embed url.
-  $embed_url = str_replace('watch', 'v', $url);
-
-  $video_parts = explode('?v=', $embed_url);
-
-  if (count($video_parts) < 2) {
+  // Only embed youtube videos.
+  $url_parts = parse_url($url);
+  if ($host == 'www.youtube.com') {
+    $query = $url_parts['query'];
+    parse_str($query, $output);
+    $youtube_id = $output['v'];
+  }
+  // Check for shortened urls.
+  elseif ($url_parts['host'] == 'youtu.be') {
+    $youtube_id = str_replace('/', '', $url_parts['path']);
+  }
+  else { 
     return FALSE;
   }
-  $embed_url = $video_parts[0] .'/' . $video_parts[1];
-  $embed_url .= '?fs=1&showinfo=0';
-
-  $embed = '';
-  $embed .= '<object width="' . $width . '" height="' . $height . '">';
-  $embed .= '<param name="movie" value="'.  $embed_url .'"></param>';
-  $embed .= '<param name="allowFullScreen" value="true"></param>';
-  $embed .= '<param name="wmode" value="transparent"></param>';
-  $embed .= '<embed src="'.  $embed_url .'"';
-  $embed .= 'type="application/x-shockwave-flash" width="' . $width . '" height="' . $height . '" allowfullscreen="true" wmode="transparent">';
-  $embed .= '</embed>';
-  $embed .= '</object>';
-
-  return $embed;
+  // Construct embed code.
+  if ($youtube_id) {
+    return '<iframe width="' . $width . '" height="' . $height . '" src="http://www.youtube.com/embed/' . $youtube_id . '" frameborder="0" allowfullscreen></iframe>';
+  }
 }
 
 /**
