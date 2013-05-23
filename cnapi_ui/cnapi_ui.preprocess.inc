@@ -815,13 +815,14 @@ function _template_preprocess_cnapi_ui_address($address) {
 function _cnapi_ui_video_url_to_embed($url, $width, $height) {
   // Only embed youtube videos.
   $url_parts = parse_url($url);
+  $host = $url_parts['host'];
   if ($host == 'www.youtube.com') {
     $query = $url_parts['query'];
     parse_str($query, $output);
     $youtube_id = $output['v'];
   }
   // Check for shortened urls.
-  elseif ($url_parts['host'] == 'youtu.be') {
+  elseif ($host == 'youtu.be') {
     $youtube_id = str_replace('/', '', $url_parts['path']);
   }
   else { 
