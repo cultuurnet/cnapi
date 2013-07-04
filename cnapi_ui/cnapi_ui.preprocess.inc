@@ -65,29 +65,37 @@ function template_preprocess_cnapi_ui_list(&$variables) {
 
   // Gather the sort links and add them as an array to $sort_links.
   $sort_links = array();
-
+  
   $request_sort = $variables['request'];
-
+  
+  // The sort links with keys and directions.
+  list($current_sort_key, $current_sort_direction) = explode(" ", $request_sort['query']['sort']);
+  
   $context = cnapi_ui_contexts('id', $variables['request']['context']);
-
+  
   if ($context['type'] == 'event') {
-    $request_sort['query']['sort'] = 'date ASC';
-    $sort_links[] = cnapi_url_dp2dul('Datum', $request_sort);
-
-    $request_sort['query']['sort'] = 'location ASC';
-    $sort_links[] = cnapi_url_dp2dul('Locatie', $request_sort);
-
-    $request_sort['query']['sort'] = 'title ASC';
-    $sort_links[] = cnapi_url_dp2dul('Titel', $request_sort);
+    $sort_fields = array('date' => 'Datum', 'location' => 'Locatie', 'title' => 'Titel');
   }
   elseif ($context['type'] == 'production') {
-    $request_sort['query']['sort'] = 'weight ASC';
-    $sort_links[] = cnapi_url_dp2dul('Meest gespeeld', $request_sort);
-
-    $request_sort['query']['sort'] = 'title ASC';
-    $sort_links[] = cnapi_url_dp2dul('Titel', $request_sort);
+    $sort_fields = array('weight' => 'Meest gespeeld', 'title' => 'Titel');
   }
-
+  
+  if (!empty($sort_fields)) {
+    foreach ($sort_fields as $field_key => $field_label) {
+      $options = array('attributes' => array('classes' => array('sort', 'sort-' . $field_key)));
+      $new_sort_direction = 'ASC';
+  
+      if ($current_sort_key == $field_key) {
+        $new_sort_direction = $current_sort_direction == 'DESC' ? 'ASC' : 'DESC';
+        $options['attributes']['classes'][] = 'active';
+        $options['attributes']['classes'][] = 'sort-' . $current_sort_direction;
+      }
+  
+      $request_sort['query']['sort'] = $field_key . ' ' . $new_sort_direction;
+      $sort_links[] = cnapi_url_dp2dul($field_label, $request_sort, $options);
+    }
+  }
+  
   if (!empty($sort_links)) {
     $variables['sort_links'] = theme('item_list', array('items' => $sort_links));
   }

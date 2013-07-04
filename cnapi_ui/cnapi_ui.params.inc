@@ -27,9 +27,12 @@ function cnapi_url_p2dul($text, $request, $context) {
   return cnapi_url_dp2dul($text, $request_dp);
 }
 
-function cnapi_url_dp2dul($text, $request) {
+function cnapi_url_dp2dul($text, $request, $options = array()) {
   $url = cnapi_url_dp2dua($request);
 
+  if (!empty($options)) {
+    $url['options'] += $options;
+  }
   return l($text, $url['path'], $url['options']);
 }
 
