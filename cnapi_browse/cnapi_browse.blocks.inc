@@ -149,6 +149,10 @@ function cnapi_browse_block_view_search() {
   $block['subject'] = 'Zoek';
   $block['content'] = drupal_get_form('cnapi_browse_search_form');
 
+  if (variable_get('cnapi_browse_inline_datepicker', 0) == 1) {
+    $block['content']['#attributes']['class'][] = "inline-datepicker";
+  }
+
   return $block;
 }
 
