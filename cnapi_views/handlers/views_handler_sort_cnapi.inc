@@ -10,7 +10,12 @@ class views_handler_sort_cnapi extends views_handler_sort {
   }
 
   function query() {
-    $this->query->add_orderby($this->options['sort'], $this->options['direction']);
+    if ($this->options['sort'] == 'weightweek') {
+      $this->query->add_orderby($this->options['sort']);
+    }
+    else {
+      $this->query->add_orderby($this->options['sort'], $this->options['direction']);
+    }
   }
 
   function option_definition() {
@@ -26,6 +31,9 @@ class views_handler_sort_cnapi extends views_handler_sort {
    * Display whether or not the sort order is ascending or descending
    */
   function admin_summary() {
+    if ($this->options['sort'] == 'weightweek') {
+      return $this->options['sort'];
+    }
     return $this->options['sort'] . ' ' . $this->options['direction'];
   }
 

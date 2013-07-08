@@ -180,5 +180,8 @@ class cnapi_views_query extends views_plugin_query {
     if (!is_null($sort) && !is_null($direction)) {
       $this->orderby = $sort . ' ' . $direction;
     }
+    elseif (!is_null($sort) && $sort == "weightweek") {
+      $this->orderby = $sort;
+    }
   }
 }
