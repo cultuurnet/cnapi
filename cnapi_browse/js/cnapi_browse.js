@@ -29,6 +29,9 @@ Drupal.behaviors.cnapiBrowseDatePicker = {
 
     // hide the date field for fields and add the datepicker
     $('.form-item:has(.date-for-datepicker)', context).after('<div class="datepicker"></div>');
+ 
+    // hide the datepicker when set to inline
+    $('.inline-datepicker .datepicker', context).hide();
 
     // add extra option to select field to display datepicker
     $('.has-datepicker', context).append($("<option></option>").val("_datepicker").text('Kies zelf data'));
@@ -37,9 +40,15 @@ Drupal.behaviors.cnapiBrowseDatePicker = {
     $('.has-datepicker', context).bind('change', function () {
       if ($(this).val() == '_datepicker') {
         $('.datepicker', $(this).parents('form')).dpDisplay();
+        $('.inline-datepicker .datepicker', context).show();
 
         // we need to reset the selected option so we won't submit invalid options to Drupal
         $(this).val('_none');
+      }
+      else {
+        // Hide datepicker and remove selected dates
+        $('.inline-datepicker .datepicker', context).hide();
+        $('.date-for-datepicker', $(this).parents('form')).val('');
       }
 
       return false;
@@ -48,11 +57,18 @@ Drupal.behaviors.cnapiBrowseDatePicker = {
     // create the datepicker and bind the "dateSelected" event
     $('.datepicker', context)
       .each(function () {
-        var inline = $(this).parents('form').has('.has-datepicker').length == 0;
+        // check if datepicker should be displayed inline
+        var inline = $(this).parents('form').has('.has-datepicker').length == 0 || $(this).parents('form.inline-datepicker').length == 1;
+        
+        // only add Close button if datepicker isn't set to inline
+        var displayClose = 'true';
+        if (inline == 'true') {
+          displayClose = 'false';
+        }
 
         $(this).datePicker({
           createButton: false,
-          displayClose: true,
+          displayClose: displayClose,
           inline: inline,
           closeOnSelect: false,
           selectMultiple: true
