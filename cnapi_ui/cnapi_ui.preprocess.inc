@@ -70,7 +70,8 @@ function template_preprocess_cnapi_ui_list(&$variables) {
   
   // The sort links with keys and directions.
   list($current_sort_key, $current_sort_direction) = explode(" ", $request_sort['query']['sort']);
-  
+  $current_sort_key = empty($current_sort_key) ? 'date' : $current_sort_key;
+  $current_sort_direction = empty($current_sort_direction) ? 'ASC' : $current_sort_direction;
   $context = cnapi_ui_contexts('id', $variables['request']['context']);
   
   if ($context['type'] == 'event') {
@@ -82,13 +83,13 @@ function template_preprocess_cnapi_ui_list(&$variables) {
   
   if (!empty($sort_fields)) {
     foreach ($sort_fields as $field_key => $field_label) {
-      $options = array('attributes' => array('classes' => array('sort', 'sort-' . $field_key)));
+      $options = array('attributes' => array('class' => array('sort', 'sort-' . $field_key)));
       $new_sort_direction = 'ASC';
   
       if ($current_sort_key == $field_key) {
         $new_sort_direction = $current_sort_direction == 'DESC' ? 'ASC' : 'DESC';
-        $options['attributes']['classes'][] = 'active';
-        $options['attributes']['classes'][] = 'sort-' . $current_sort_direction;
+        $options['attributes']['class'][] = 'active';
+        $options['attributes']['class'][] = 'sort-' . $current_sort_direction;
       }
   
       $request_sort['query']['sort'] = $field_key . ' ' . $new_sort_direction;
