@@ -88,7 +88,7 @@ function template_preprocess_cnapi_ui_list(&$variables) {
   
       if ($current_sort_key == $field_key) {
         $new_sort_direction = $current_sort_direction == 'DESC' ? 'ASC' : 'DESC';
-        $options['attributes']['class'][] = 'active';
+        $options['attributes']['class'][] = 'sort-active';
         $options['attributes']['class'][] = 'sort-' . $current_sort_direction;
       }
   
