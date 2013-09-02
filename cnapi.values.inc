@@ -100,7 +100,7 @@ function cnapi_get_location_autocomplete($only_cities = FALSE, $return_zip = FAL
     $sql .= "SELECT cl.lid, cl.zip, cl.name, 'city' AS type, IF(:input REGEXP '^[0-9]+.*$', cl.zip, cl.name) AS sort FROM {cnapi_location} cl WHERE cl.type = 'city' AND (cl.name LIKE :start OR cl.zip LIKE :start OR CONCAT(cl.zip, ' ', cl.name) LIKE :start)";
     $sql .= ") AS tmp ORDER BY sort ASC, name ASC, type DESC";
 
-    $locations = db_query_range($sql, 0, 10, array(':did' => CNAPI_LOCATIONS_DIMENSION_MUNICIPALITY, ':start' => strtolower($input) . '%', ':input' => strtolower($input)))->fetchAll(PDO::FETCH_ASSOC);
+    $locations = db_query_range($sql, 0, 20, array(':did' => CNAPI_LOCATIONS_DIMENSION_MUNICIPALITY, ':start' => strtolower($input) . '%', ':input' => strtolower($input)))->fetchAll(PDO::FETCH_ASSOC);
 
     foreach ($locations as $location) {
       if ($only_cities && $location['type'] != 'city') {
