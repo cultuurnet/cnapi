@@ -81,7 +81,7 @@ function template_preprocess_cnapi_extras_movie_summary(&$variables) {
   if (isset($object['thumbnail']) && !empty($object['thumbnail'])) {
     $thumbnail_url = str_replace('maxwidth=162&maxheight=109', 'width=40&height=56&crop=auto', $object['thumbnail']);
   }
-  $thumbnail_img = theme('image', array('path' => $thumbnail_url, 'alt' => $variables['title']));
+  $thumbnail_img = theme('image', array('path' => $thumbnail_url, 'alt' => $object['title']));
   $object_url['options']['html'] = TRUE;
   $variables['thumbnail'] = l($thumbnail_img, $object_url['path'], $object_url['options']);
 }
