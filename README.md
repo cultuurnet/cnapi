@@ -6,7 +6,7 @@ Meer informatie over de CultuurNet API vind je op [tools.uitdatabank.be/docs/out
 
 ## Hoe ga je verder?
 
-* Je wil meer te weten komen over de [CultuurNet API module suite](https://github.com/davyvandenbremt/cnapi/wiki/Praktisch): wat, waarom, requirements?
-* Wil je [een overzicht van de verschillende modules](https://github.com/davyvandenbremt/cnapi/wiki/Overzicht-van-de-verschillende-modules) en zo te weten komen waarvoor welke module gebruikt dient te worden?
-* Je hebt hulp nodig bij de [installatie en configuratie](https://github.com/davyvandenbremt/cnapi/wiki/Installatie-en-configuratie) van de modules?
-* Je bent Drupal developer of themer en je wil zelf de [modules uitbreiden](https://github.com/davyvandenbremt/cnapi/wiki/Werken-met-de-CultuurNet-API-suite-als-developer-of-themer), extra functionaliteit op de modules schrijven, of je wil de [look & feel van de modules aanpassen](https://github.com/davyvandenbremt/cnapi/wiki/Werken-met-de-CultuurNet-API-suite-als-developer-of-themer)?
+* Je wil meer te weten komen over de [CultuurNet API module suite](https://github.com/cultuurnet/cnapi/wiki/Praktisch): wat, waarom, requirements?
+* Wil je [een overzicht van de verschillende modules](https://github.com/cultuurnet/cnapi/wiki/Overzicht-van-de-verschillende-modules) en zo te weten komen waarvoor welke module gebruikt dient te worden?
+* Je hebt hulp nodig bij de [installatie en configuratie](https://github.com/cultuurnet/cnapi/wiki/Installatie-en-configuratie) van de modules?
+* Je bent Drupal developer of themer en je wil zelf de [modules uitbreiden](https://github.com/cultuurnet/cnapi/wiki/Werken-met-de-CultuurNet-API-suite-als-developer-of-themer), extra functionaliteit op de modules schrijven, of je wil de [look & feel van de modules aanpassen](https://github.com/cultuurnet/cnapi/wiki/Werken-met-de-CultuurNet-API-suite-als-developer-of-themer)?
