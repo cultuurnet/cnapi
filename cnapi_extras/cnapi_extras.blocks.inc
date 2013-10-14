@@ -105,6 +105,7 @@ function cnapi_extras_block_cache_id_movie_results() {
 }
 
 function cnapi_extras_block_is_visible_movie_results() {
+
   $request = cnapi_ui_get_active_request();
   
   if (isset($request['context'])) {
@@ -114,6 +115,10 @@ function cnapi_extras_block_is_visible_movie_results() {
     }
   }
   else {
+    return FALSE;
+  }
+
+  if (isset($request['query']['k'])) {
     return FALSE;
   }
 
