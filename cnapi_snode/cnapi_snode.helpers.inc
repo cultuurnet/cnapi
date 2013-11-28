@@ -205,7 +205,10 @@ function cnapi_snode_cleanup() {
 function cnapi_snode_update_from_api() {
   $last_update = variable_get('cnapi_snode_last_update', 0);
 
-  $query = array('changedsince' => date('Y-m-d', $last_update), 'pagelength' => 1000);
+  // set a negative offset of 2 hours
+  $last_update = $last_update - 60 * 60 * 2;
+
+  $query = array('changedsince' => date('Y-m-d\Th.i', $last_update), 'pagelength' => 2000);
 
   $types = array('actor', 'event', 'production');
 
