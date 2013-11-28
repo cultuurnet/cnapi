@@ -31,7 +31,7 @@ function cnapi_snode_drush_command() {
   $items['cnapi-snode-update'] = array(
     'description' => 'Update shadow nodes.',
     'examples' => array(
-      'drush cnapi-snode-cleanup' => 'Update shadow nodes of objects that have changed on the API',
+      'drush cnapi-snode-update' => 'Update shadow nodes of objects that have changed on the API',
     ),
   );
 
