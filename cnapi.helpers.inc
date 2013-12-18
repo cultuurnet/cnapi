@@ -1,8 +1,6 @@
 <?php
 
 function cnapi_http_request($url, $method = 'GET', $data = array()) {
-  $reponse = FALSE;
-
   _cnapi_timer('start', $url);
 
   $ch = curl_init($url);
