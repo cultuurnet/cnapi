@@ -198,7 +198,8 @@ function cnapi_ui_seo_redirects() {
 
     // Compare the $url path part of the correct representation with the path of the current request.
     if ($url['path'] != request_path_raw()) {
-      cnapi_ui_goto($request);
+      $params = drupal_get_query_parameters();
+      cnapi_ui_goto($request, array('query' => $params));
     }
   }
 }
