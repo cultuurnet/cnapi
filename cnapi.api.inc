@@ -145,6 +145,7 @@ function cnapi_api_request_cached($request) {
     }
     else {
       watchdog('cnapi', 'Failed request !request.', array('!request' => serialize($request)), WATCHDOG_ERROR);
+      _cnapi_cache_set($request, FALSE);
       return FALSE;
     }
   }
