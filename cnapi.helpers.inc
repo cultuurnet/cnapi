@@ -115,12 +115,12 @@ function _cnapi_xpath_cast($cast_function, $xml, $query, $multiple = FALSE) {
 
   if ($multiple) {
     foreach ($objects as $object) {
-      $result[] = is_null($object) || ($cast_function != 'strval' && empty($object)) ? NULL : call_user_func($cast_function, $object);
+      $result[] = is_null($object) || ($cast_function != 'strval' && $cast_function != 'floatval' && empty($object)) ? NULL : call_user_func($cast_function, $object);
     }
     return array_filter($result);
   }
   else {
-    return is_null($objects[0]) || ($cast_function != 'strval' && empty($objects[0])) ? NULL : call_user_func($cast_function, $objects[0]);
+    return is_null($objects[0]) || ($cast_function != 'strval' && $cast_function != 'floatval' && empty($objects[0])) ? NULL : call_user_func($cast_function, $objects[0]);
   }
 }
 
