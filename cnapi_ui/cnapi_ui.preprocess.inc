@@ -163,7 +163,7 @@ function template_preprocess_cnapi_ui_event_mini_summary(&$variables) {
 
     $url = 'culturefeed/do/' . CultureFeed_Activity::TYPE_LIKE . '/' . CultureFeed_Activity::CONTENT_TYPE_EVENT . '/' . $object['cdbid'];
      if (user_is_anonymous()) {
-       $variables['like_link'] = l('Vind ik leuk', 'authenticated', array('attributes' => array('class' => array('like-link disabled')))) . theme('culturefeed_ui_connect_hover', array('url' => $url));
+       $variables['like_link'] = l('Vind ik leuk', 'authenticated', array('attributes' => array('class' => array('like-link disabled')), 'query' => array('destination' => $url, 'medium' => 'like-attend', 'content' => 'related-events')));
      }
      else {
        $variables['like_link'] = l('Vind ik leuk', $url, array('attributes' => array('class' => array('like-link'))), array('absolute' => TRUE));
