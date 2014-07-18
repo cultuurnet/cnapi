@@ -123,7 +123,7 @@ function cnapi_get_location_autocomplete($only_cities = FALSE, $return_zip = FAL
   }
 
   drupal_json_output($matches);
-  drupal_page_footer();
+
 }
 
 function cnapi_actor_autocomplete($input = '') {
@@ -138,7 +138,6 @@ function cnapi_actor_autocomplete($input = '') {
   }
 
   drupal_json_output($matches);
-  drupal_page_footer();
 }
 
 function cnapi_get_provinces() {
