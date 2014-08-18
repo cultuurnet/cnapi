@@ -295,7 +295,14 @@ function _template_preprocess_cnapi_ui_object_summary(&$variables, $type) {
 
   // reservation
   if ($type == 'event') {
-    $variables['reservation'] = !empty($object['reservation']) ? l('Bestel tickets', $object['reservation'], array('attributes' => array('class' => 'reservation-link', 'rel' => 'nofollow'))) : '';
+    $variables['reservation'] = '';
+    if (!empty($object['reservation'])) {
+      // split string in case of multiple reservation links
+      $reservation_links = explode(';', $object['reservation']);
+      // only use first link (we don't support multiple ticketlinks it's bad UX)
+      $reservation_link = $reservation_links[0];
+      $variables['reservation'] = l('Bestel tickets', $reservation_link, array('attributes' => array('class' => 'reservation-link', 'rel' => 'nofollow')));
+    }
   }
 }
 
