@@ -12,6 +12,7 @@ function theme_cnapi_ui_page_list_rss($variables) {
 
       $object_url = cnapi_url_dp2dua($request_detail);
       $object_url['options']['absolute'] = TRUE;
+      $object_url['options']['query'] = array('utm_campaign' => 'rss', 'utm_medium' => 'content', 'utm_source' => 'external', 'utm_content' => 'feed');
       $object_url = url($object_url['path'], $object_url['options']);
 
       $args = array(
