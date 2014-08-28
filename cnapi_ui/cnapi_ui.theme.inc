@@ -21,7 +21,7 @@ function theme_cnapi_ui_page_list_rss($variables) {
         array('key' => 'postid', 'value' => $object['cdbid']),
       );
 
-      $body = theme('cnapi_ui_' . $type . '_summary', array($type => $object, 'url_absolute' => TRUE));
+      $body = $object['shortdescription'];
       $items .= format_rss_item($object['title'], $object_url, $body, $args);
     }
   }
