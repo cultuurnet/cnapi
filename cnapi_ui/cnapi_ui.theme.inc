@@ -21,7 +21,14 @@ function theme_cnapi_ui_page_list_rss($variables) {
         array('key' => 'postid', 'value' => $object['cdbid']),
       );
 
-      $body = $object['shortdescription'];
+      $body = '';
+      if (isset($object['city']) && !empty($object['city'])) {
+        $body .= $object['city'] . ', ';     
+      }
+      if (isset($object['calendarsummary']) && !empty($object['calendarsummary'])) {
+        $body .= $object['calendarsummary'] . ' - ';
+      }
+      $body .= $object['shortdescription'];
       $items .= format_rss_item($object['title'], $object_url, $body, $args);
     }
   }
