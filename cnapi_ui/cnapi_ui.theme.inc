@@ -27,7 +27,7 @@ function theme_cnapi_ui_page_list_rss($variables) {
   }
 
   $site_name = variable_get('site_name', 'Drupal');
-  $url = url('', array('absolute' => TRUE));
+  $url = url('', array('absolute' => TRUE, 'query' => array('utm_campaign' => 'rss', 'utm_medium' => 'content', 'utm_source' => 'external', 'utm_content' => 'feed')));
   $description = '';
 
   $output  = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n";
