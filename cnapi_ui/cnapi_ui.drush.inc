@@ -33,7 +33,7 @@ function cnapi_ui_drush_command() {
 function drush_cnapi_ui_register_deletions() {
 
   $last_registration = variable_get('cnapi_ui_last_registration', 0);
-  $last_registration = 0;
+  //$last_registration = 0;
   $query = array('deletedsince' => date('Y-m-d', $last_registration));
 
   $types = array('actor', 'event', 'production');
