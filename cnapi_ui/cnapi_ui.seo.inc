@@ -79,7 +79,7 @@ function cnapi_ui_set_canonical_and_noindex() {
 
     // If we're on an event list, we look at headings
     if ($context['type'] == 'event') {
-      if (count(array_diff(array_keys($request['query']), array('page', 'heading', 'regio', 'cityid'))) > 0) {
+      if (count(array_diff(array_keys($request['query']), array('page', 'heading', 'regio', 'cityid', 'k'))) > 0) {
         $noindex = TRUE;
       }
 
@@ -87,6 +87,11 @@ function cnapi_ui_set_canonical_and_noindex() {
         $headings = $request['query']['heading'];
         $headings = explode(';', $headings);
         if (count($headings) > 1) {
+          $noindex = TRUE;
+        }
+
+        // Don't allow combination of heading & keywords
+        elseif (isset($request['query']['k'])) {
           $noindex = TRUE;
         }
         
@@ -102,6 +107,15 @@ function cnapi_ui_set_canonical_and_noindex() {
           elseif ($regios[0] < 34 || $regios[0] > 348) {
             $noindex = TRUE;
           }
+        }
+      }
+
+      // Allow keyword search to be indexed
+      elseif (isset($request['query']['k'])) {
+        $keywords = $request['query']['k'];
+        $keywords = explode(';', $keywords);
+        if (count($keywords) > 1) {
+          $noindex = TRUE;
         }
       }
       else {
