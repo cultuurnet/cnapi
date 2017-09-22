@@ -748,7 +748,7 @@ function _cnapi_parse_contactinfo(&$data, $field, $xml) {
   _cnapi_parse_str($info['main'], 'mail', $xml, 'contactinfo/mail[@main="true"]');
 
   // $info['main']['phone']
-  _cnapi_parse_str($info['main'], 'phone', $xml, 'contactinfo/phone[@main="true" and @type="phone"]');
+  _cnapi_parse_str($info['main'], 'phone', $xml, 'contactinfo/phone[@main="true"]');
 
   // $info['main']['fax']
   _cnapi_parse_str($info['main'], 'fax', $xml, 'contactinfo/phone[@main="true" and @type="fax"]');
@@ -760,7 +760,7 @@ function _cnapi_parse_contactinfo(&$data, $field, $xml) {
   _cnapi_parse_str($info['reservation'], 'mail', $xml, 'contactinfo/mail[@reservation="true"]');
 
   // $info['reservation']['phone']
-  _cnapi_parse_str($info['reservation'], 'phone', $xml, 'contactinfo/phone[@reservation="true" and @type="phone"]');
+  _cnapi_parse_str($info['reservation'], 'phone', $xml, 'contactinfo/phone[@reservation="true"]');
 
   // $info['reservation']['fax']
   _cnapi_parse_str($info['reservation'], 'fax', $xml, 'contactinfo/phone[@reservation="true" and @type="fax"]');
@@ -772,7 +772,7 @@ function _cnapi_parse_contactinfo(&$data, $field, $xml) {
   _cnapi_parse_str($info['other'], 'mail', $xml, 'contactinfo/mail[not(@main="true" or @reservation="true")]', TRUE);
 
   // $info['other']['phone']
-  _cnapi_parse_str($info['other'], 'phone', $xml, 'contactinfo/phone[not(@main="true" or @reservation="true") and @type="phone"]', TRUE);
+  _cnapi_parse_str($info['other'], 'phone', $xml, 'contactinfo/phone[not(@main="true" or @reservation="true")]', TRUE);
 
   // $info['other']['fax']
   _cnapi_parse_str($info['other'], 'fax', $xml, 'contactinfo/phone[not(@main="true" or @reservation="true") and @type="fax"]', TRUE);
